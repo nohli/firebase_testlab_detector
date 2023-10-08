@@ -92,7 +92,9 @@ jobs:
       - name: Disable analytics
         run: flutter config --no-analytics
       - name: Flutter pub get
-        run: flutter pub get
+        run: |
+          cd example
+          flutter pub get
       - name: Start emulator and run integration test
         uses: reactivecircus/android-emulator-runner@v2
         with:
