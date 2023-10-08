@@ -93,14 +93,13 @@ jobs:
         run: flutter config --no-analytics
       - name: Flutter pub get
         run: flutter pub get
-      - name: Start emulator
+      - name: Start emulator and run integration test
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 33
           target: google_apis
           arch: arm64-v8a
           profile: pixel_5
-      - name: Flutter test example
-        run: |
-          cd example
-          flutter test integration_test
+          script: |
+            cd example
+            flutter test integration_test
