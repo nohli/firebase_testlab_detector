@@ -1,0 +1,22 @@
+name: firebase_testlab_detector_example
+description: Demonstrates how to use the firebase_testlab_detector plugin.
+publish_to: 'none'
+
+environment:
+  sdk: '>=2.12.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  firebase_testlab_detector:
+    path: ../
+
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:

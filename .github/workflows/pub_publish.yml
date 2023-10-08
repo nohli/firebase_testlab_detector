@@ -1,0 +1,18 @@
+name: Pub publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    name: Pub publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Publish
+        uses: k-paxian/dart-package-publisher@v1.6
+        with:
+          credentialJson: ${{ secrets.CREDENTIALS }}
