@@ -101,4 +101,4 @@ jobs:
         with:
           arch: x86_64
           api-level: 33
-          script: ./run_integration_test.sh
+          script: ./scripts/run_integration_test.sh
