@@ -101,4 +101,4 @@ jobs:
         with:
           arch: x86_64
           api-level: 33
-          script: "'cd example && flutter test integration_test'"
+          script: ./run_integration_test.sh
