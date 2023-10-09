@@ -5,6 +5,12 @@ issue_tracker: https://github.com/nohli/firebase_testlab_detector/issues
 
 version: 0.0.1
 
+topics:
+  - android
+  - plugin
+  - firebase-test-lab
+  - google-play-pre-launch-reports
+
 environment:
   sdk: '>=2.12.0 <4.0.0'
   flutter: '>=2.0.0'
