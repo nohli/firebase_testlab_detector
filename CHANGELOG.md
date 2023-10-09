@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Update pub.dev topics.
+
 ## 0.1.1
 
 * Make it work from all platforms.
