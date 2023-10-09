@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _isRunningInTestLab = false;
+  bool _isRunningInTestlab = false;
 
   @override
   void initState() {
@@ -24,21 +24,21 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    bool isRunningInTestLab;
+    bool isRunningInTestlab;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      isRunningInTestLab =
+      isRunningInTestlab =
           await FirebaseTestlabDetector.isAppRunningInTestlab();
     } on PlatformException {
-      isRunningInTestLab = false;
+      isRunningInTestlab = false;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-    setState(() => _isRunningInTestLab = isRunningInTestLab);
+    setState(() => _isRunningInTestlab = isRunningInTestlab);
   }
 
   @override
@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: Text(
-            _isRunningInTestLab
+            _isRunningInTestlab
                 ? 'This app runs in Firebase Test Lab.'
                 : 'This app does not run in Firebase Test Lab.',
           ),

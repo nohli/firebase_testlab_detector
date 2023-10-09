@@ -13,7 +13,7 @@ flutter pub add firebase_testlab_detector
 ### 2. Use the plugin
 
 ```dart
-final isRunningInTestLab = await FirebaseTestlabDetector.isAppRunningInTestlab();
+final isRunningInTestlab = await FirebaseTestlabDetector.isAppRunningInTestlab();
 ```
 
 This plugin reads the system property `firebase.test.lab`, and returns a boolean value indicating whether the app is running in Firebase Test Lab.
