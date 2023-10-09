@@ -91,6 +91,11 @@ jobs:
         uses: subosito/flutter-action@v2
       - name: Disable analytics
         run: flutter config --no-analytics
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
       - name: Start emulator and run integration test
         uses: reactivecircus/android-emulator-runner@v2
         with:
