@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 
 import 'firebase_testlab_detector_platform_interface.dart';
@@ -11,7 +9,7 @@ class FirebaseTestlabDetector {
   ///
   /// Only works on Android. Returns false on other platforms.
   static Future<bool> isAppRunningInTestlab() async {
-    final isAndroid = !kIsWeb && Platform.isAndroid;
+    final isAndroid = defaultTargetPlatform == TargetPlatform.android;
     if (!isAndroid) return false;
 
     return FirebaseTestlabDetectorPlatform.instance.isAppRunningInTestlab();
