@@ -1,3 +1,7 @@
+## 0.2.0
+
+* Also return `false` (instead of throwing) if the app runs in a web browser on Android.
+
 ## 0.1.2
 
 * Update pub.dev topics.

@@ -9,7 +9,8 @@ class FirebaseTestlabDetector {
   ///
   /// Only works on Android. Returns false on other platforms.
   static Future<bool> isAppRunningInTestlab() async {
-    final isAndroid = defaultTargetPlatform == TargetPlatform.android;
+    final isAndroid =
+        !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
     if (!isAndroid) return false;
 
     return FirebaseTestlabDetectorPlatform.instance.isAppRunningInTestlab();
