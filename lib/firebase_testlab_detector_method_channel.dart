@@ -11,9 +11,9 @@ class MethodChannelFirebaseTestlabDetector
   final methodChannel = const MethodChannel('firebase_testlab_detector');
 
   @override
-  Future<bool> isAppRunningInTestlab() async {
+  Future<bool?> isAppRunningInTestlab() async {
     final isRunningInTestlab =
         await methodChannel.invokeMethod<bool>('isAppRunningInTestlab');
-    return isRunningInTestlab ?? false;
+    return isRunningInTestlab;
   }
 }

@@ -24,7 +24,7 @@ abstract class FirebaseTestlabDetectorPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<bool> isAppRunningInTestlab() {
+  Future<bool?> isAppRunningInTestlab() {
     throw UnsupportedError(
       'Use the implementation method of FirebaseTestlabDetectorPlatform.',
     );

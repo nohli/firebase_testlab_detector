@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       isRunningInTestlab =
-          await FirebaseTestlabDetector.isAppRunningInTestlab();
+          await FirebaseTestlabDetector.isAppRunningInTestlab() ?? false;
     } on PlatformException {
       isRunningInTestlab = false;
     }

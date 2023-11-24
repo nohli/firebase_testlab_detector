@@ -3,7 +3,7 @@ description: This Flutter plugin for Android determines whether the app is runni
 repository: https://github.com/nohli/firebase_testlab_detector
 issue_tracker: https://github.com/nohli/firebase_testlab_detector/issues
 
-version: 0.2.0
+version: 0.3.0
 
 topics:
   - android

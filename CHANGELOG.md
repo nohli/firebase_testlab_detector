@@ -1,3 +1,7 @@
+## 0.3.0
+
+* Return `null` instead of `false` on unsupported platforms.
+
 ## 0.2.0
 
 * Also return `false` (instead of throwing) if the app runs in a web browser on Android.
