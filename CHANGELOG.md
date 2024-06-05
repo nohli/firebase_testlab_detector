@@ -1,3 +1,8 @@
+## 1.0.0
+
+* Publish stable release.
+* Update dependencies.
+
 ## 0.3.0
 
 * Return `null` instead of `false` on unsupported platforms.
