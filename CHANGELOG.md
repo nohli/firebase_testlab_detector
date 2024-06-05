@@ -1,3 +1,8 @@
+## 1.0.1
+
+* Widen `flutter_lints` dependency.
+* Sort dependencies.
+
 ## 1.0.0
 
 * Publish stable release.
