@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Downgrade Gradle plug-in for compatibility.
+
 ## 1.0.1
 
 * Widen `flutter_lints` dependency.
