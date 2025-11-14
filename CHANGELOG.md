@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Maintenance release.
+
 ## 1.0.2
 
 * Downgrade Gradle plug-in for compatibility.
