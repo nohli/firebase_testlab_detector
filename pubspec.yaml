@@ -1,9 +1,10 @@
 name: firebase_testlab_detector
+
 description: This Flutter plugin for Android determines whether the app is running within Firebase Test Lab, which is used for Google Play Pre-Launch Reports.
 repository: https://github.com/nohli/firebase_testlab_detector
 issue_tracker: https://github.com/nohli/firebase_testlab_detector/issues
 
-version: 1.0.3
+version: 2.0.0
 
 topics:
   - android
@@ -13,8 +14,8 @@ topics:
   - firebase-test-lab
 
 environment:
-  sdk: '>=2.12.0 <4.0.0'
-  flutter: '>=2.0.0'
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.10.0'
 
 dependencies:
   flutter:
@@ -22,7 +23,7 @@ dependencies:
   plugin_platform_interface: ^2.0.0
 
 dev_dependencies:
-  flutter_lints: ">=2.0.0 <7.0.0"
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
 
