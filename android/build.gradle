@@ -1,19 +1,6 @@
 group = "io.achim.firebase_testlab_detector"
 version = "1.0-SNAPSHOT"
 
-buildscript {
-    ext.kotlin_version = "2.1.0"
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.7.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
-    }
-}
-
 allprojects {
     repositories {
         google()
@@ -22,22 +9,41 @@ allprojects {
 }
 
 apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
+
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0] as int
+boolean hasBuiltInKotlinSupport = agpMajor >= 9
+
+def builtInKotlinProperty = findProperty('android.builtInKotlin')
+boolean isBuiltInKotlinEnabled = builtInKotlinProperty == null ||
+        builtInKotlinProperty.toString().toBoolean()
+
+boolean shouldApplyKotlinGradlePlugin = !hasBuiltInKotlinSupport || !isBuiltInKotlinEnabled
+
+if (shouldApplyKotlinGradlePlugin) {
+    apply plugin: 'kotlin-android'
+}
+
+// Flutter 3.10 does not expose this extension to plugin library projects.
+def flutterExtension = project.extensions.findByName("flutter")
+def pluginCompileSdk = flutterExtension?.compileSdkVersion ?: 33
+def pluginMinSdk = flutterExtension?.minSdkVersion ?: 16
 
 android {
     if (project.android.hasProperty("namespace")) {
         namespace = "io.achim.firebase_testlab_detector"
     }
 
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = pluginCompileSdk
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+    if (shouldApplyKotlinGradlePlugin) {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
     }
 
     sourceSets {
@@ -46,7 +52,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = flutter.minSdkVersion
+        minSdk = pluginMinSdk
     }
 
     dependencies {
@@ -63,6 +69,14 @@ android {
                outputs.upToDateWhen {false}
                showStandardStreams = true
             }
+        }
+    }
+}
+
+if (!shouldApplyKotlinGradlePlugin) {
+    kotlin {
+        compilerOptions {
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
         }
     }
 }

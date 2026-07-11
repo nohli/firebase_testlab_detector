@@ -1,5 +1,7 @@
 package io.achim.firebase_testlab_detector
 
+import android.content.ContentResolver
+import android.provider.Settings
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlin.test.Test
@@ -17,11 +19,22 @@ internal class FirebaseTestlabDetectorPluginTest {
   @Test
   fun onMethodCall_isAppRunningInTestlab_returnsExpectedValue() {
     val plugin = FirebaseTestlabDetectorPlugin()
+    val contentResolver = Mockito.mock(ContentResolver::class.java)
+    val contentResolverField = plugin.javaClass.getDeclaredField("contentResolver")
+    contentResolverField.isAccessible = true
+    contentResolverField.set(plugin, contentResolver)
 
     val call = MethodCall("isAppRunningInTestlab", null)
     val mockResult: MethodChannel.Result = Mockito.mock(MethodChannel.Result::class.java)
-    plugin.onMethodCall(call, mockResult)
 
-    Mockito.verify(mockResult).success(true)
+    Mockito.mockStatic(Settings.System::class.java).use { settings ->
+      settings.`when`<String?> {
+        Settings.System.getString(contentResolver, "firebase.test.lab")
+      }.thenReturn("true")
+
+      plugin.onMethodCall(call, mockResult)
+
+      Mockito.verify(mockResult).success(true)
+    }
   }
 }
