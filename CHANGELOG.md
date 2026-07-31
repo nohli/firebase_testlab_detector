@@ -1,3 +1,10 @@
+## 3.0.0
+
+* **Breaking:** Require Flutter 3.44 and Android API 24 or newer.
+* Remove the plugin-owned Kotlin Gradle Plugin so host apps can use Android
+  Gradle Plugin 9's built-in Kotlin support.
+* Update the Android example to Android Gradle Plugin 9.1.1 and Gradle 9.3.1.
+
 ## 2.0.0
 
 * Breaking: Flutter SDK constraint is now >=3.10.0 (Dart 3-only). Apps on older Flutter versions can’t upgrade.
