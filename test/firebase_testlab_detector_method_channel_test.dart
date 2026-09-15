@@ -5,8 +5,7 @@ import 'package:firebase_testlab_detector/firebase_testlab_detector_method_chann
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelFirebaseTestlabDetector platform =
-      MethodChannelFirebaseTestlabDetector();
+  MethodChannelFirebaseTestlabDetector platform = MethodChannelFirebaseTestlabDetector();
   const MethodChannel channel = MethodChannel('firebase_testlab_detector');
 
   setUp(() {
@@ -15,8 +14,7 @@ void main() {
   });
 
   tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(channel, null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
   });
 
   test('isAppRunningInTestlab', () async {

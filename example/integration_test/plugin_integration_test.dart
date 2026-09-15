@@ -7,8 +7,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('isAppRunningInTestlab test', (WidgetTester tester) async {
-    final isRunningInTestlab =
-        await FirebaseTestlabDetector.isAppRunningInTestlab();
+    final isRunningInTestlab = await FirebaseTestlabDetector.isAppRunningInTestlab();
     expect(isRunningInTestlab, false);
   });
 }

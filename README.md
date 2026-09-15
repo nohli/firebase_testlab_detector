@@ -26,3 +26,11 @@ See also the [Firebase documentation](https://firebase.google.com/docs/test-lab/
 ## Why use this plugin?
 
 You might want to utilize this plugin to disable analytics, preventing skewed data from Firebase Test Lab (i.e., Google Play pre launch report) from appearing in your analytics dashboard.
+
+## Development
+
+Run the complete local handoff, including Dart, Flutter, Android integration, native plugin, and debug-build checks, with an Android device or emulator:
+
+```shell
+./tool/check.sh <android-device-id>
+```

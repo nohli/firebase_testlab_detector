@@ -11,6 +11,10 @@ allprojects {
 apply plugin: "com.android.library"
 apply plugin: "org.jetbrains.kotlin.android"
 
+configurations {
+    mockitoAgent
+}
+
 android {
     namespace = "io.achim.firebase_testlab_detector"
     compileSdk = flutter.compileSdkVersion
@@ -27,11 +31,15 @@ android {
     dependencies {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.20.0")
+        mockitoAgent("org.mockito:mockito-core:5.20.0") {
+            transitive = false
+        }
     }
 
     testOptions {
         unitTests.all {
             useJUnitPlatform()
+            jvmArgs("-javaagent:${configurations.mockitoAgent.asPath}")
 
             testLogging {
                events "passed", "skipped", "failed", "standardOut", "standardError"
