@@ -12,7 +12,7 @@ android_device_id="$1"
 
 cd "$repository_root"
 fvm flutter pub get --no-example
-fvm dart format --line-length 120 --output=none --set-exit-if-changed lib test example/lib example/test example/integration_test
+fvm dart format --page-width 120 --output=none --set-exit-if-changed lib test example/lib example/test example/integration_test
 fvm dart analyze
 fvm flutter test --no-pub test
 
