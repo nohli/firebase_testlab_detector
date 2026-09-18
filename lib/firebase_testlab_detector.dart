@@ -11,8 +11,7 @@ class FirebaseTestlabDetector {
   ///
   /// You can use `?? false` to treat it as false on other platforms.
   static Future<bool?> isAppRunningInTestlab() async {
-    final isAndroid =
-        !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
+    final isAndroid = !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
     if (!isAndroid) return null;
 
     return FirebaseTestlabDetectorPlatform.instance.isAppRunningInTestlab();

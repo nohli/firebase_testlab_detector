@@ -1,19 +1,6 @@
 group = "io.achim.firebase_testlab_detector"
 version = "1.0-SNAPSHOT"
 
-buildscript {
-    ext.kotlin_version = "2.1.0"
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.7.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
-    }
-}
-
 allprojects {
     repositories {
         google()
@@ -22,13 +9,13 @@ allprojects {
 }
 
 apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
+
+configurations {
+    mockitoAgent
+}
 
 android {
-    if (project.android.hasProperty("namespace")) {
-        namespace = "io.achim.firebase_testlab_detector"
-    }
-
+    namespace = "io.achim.firebase_testlab_detector"
     compileSdk = flutter.compileSdkVersion
 
     compileOptions {
@@ -36,27 +23,24 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
-    sourceSets {
-        main.java.srcDirs += "src/main/kotlin"
-        test.java.srcDirs += "src/test/kotlin"
-    }
-
     defaultConfig {
-        minSdk = flutter.minSdkVersion
+        minSdk = 24
     }
 
     dependencies {
-        testImplementation("org.jetbrains.kotlin:kotlin-test")
+        testImplementation(platform("org.junit:junit-bom:5.14.3"))
+        testImplementation("org.junit.jupiter:junit-jupiter")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
         testImplementation("org.mockito:mockito-core:5.20.0")
+        mockitoAgent("org.mockito:mockito-core:5.20.0") {
+            transitive = false
+        }
     }
 
     testOptions {
         unitTests.all {
             useJUnitPlatform()
+            jvmArgs("-javaagent:${configurations.mockitoAgent.asPath}")
 
             testLogging {
                events "passed", "skipped", "failed", "standardOut", "standardError"
@@ -64,5 +48,11 @@ android {
                showStandardStreams = true
             }
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }

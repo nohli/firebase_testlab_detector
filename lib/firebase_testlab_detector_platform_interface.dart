@@ -8,8 +8,7 @@ abstract class FirebaseTestlabDetectorPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static FirebaseTestlabDetectorPlatform _instance =
-      MethodChannelFirebaseTestlabDetector();
+  static FirebaseTestlabDetectorPlatform _instance = MethodChannelFirebaseTestlabDetector();
 
   /// The default instance of [FirebaseTestlabDetectorPlatform] to use.
   ///

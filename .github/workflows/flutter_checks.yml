@@ -49,7 +49,7 @@ jobs:
         run: flutter pub get
 
       - name: Check Dart formatting
-        run: dart format --line-length 80 --set-exit-if-changed .
+        run: dart format --page-width 120 --set-exit-if-changed .
 
   analyze:
     name: Dart analyze
@@ -123,3 +123,35 @@ jobs:
         run: |
           cd example
           flutter test
+
+  test_android:
+    name: Android native test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Disable analytics
+        run: flutter config --no-analytics
+
+      - name: Flutter pub get
+        run: |
+          flutter pub get --no-example
+          cd example
+          flutter pub get --enforce-lockfile --no-example
+
+      - name: Android native test
+        run: ./android/gradlew -p example/android :firebase_testlab_detector:testDebugUnitTest --no-daemon
