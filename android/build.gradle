@@ -9,7 +9,6 @@ allprojects {
 }
 
 apply plugin: "com.android.library"
-apply plugin: "org.jetbrains.kotlin.android"
 
 configurations {
     mockitoAgent
@@ -29,7 +28,9 @@ android {
     }
 
     dependencies {
-        testImplementation("org.jetbrains.kotlin:kotlin-test")
+        testImplementation(platform("org.junit:junit-bom:5.14.3"))
+        testImplementation("org.junit.jupiter:junit-jupiter")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
         testImplementation("org.mockito:mockito-core:5.20.0")
         mockitoAgent("org.mockito:mockito-core:5.20.0") {
             transitive = false
