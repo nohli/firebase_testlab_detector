@@ -4,6 +4,7 @@ A Flutter plugin for Android that helps determine if your app is running within 
 
 Only works on Android. Returns null on other platforms.
 Requires Flutter 3.47 or newer and Android API 24 or newer.
+Android builds require AGP 9 with built-in Kotlin support.
 
 ## Getting Started
 
