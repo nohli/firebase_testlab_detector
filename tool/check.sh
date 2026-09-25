@@ -19,7 +19,7 @@ fi
 
 cd "$repository_root"
 flutter pub get --no-example
-dart format --page-width 120 --output=none --set-exit-if-changed lib test example/lib example/test example/integration_test
+dart format --output=none --set-exit-if-changed lib test example/lib example/test example/integration_test
 dart analyze
 flutter test --no-pub test
 
