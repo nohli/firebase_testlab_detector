@@ -10,19 +10,26 @@ fi
 repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 android_device_id="$1"
 
+if [[ -z "${JAVA_HOME:-}" ]]; then
+  flutter_configuration="$(flutter config --machine)"
+  if [[ "$flutter_configuration" =~ \"jdk-dir\"[[:space:]]*:[[:space:]]*\"([^\"]+)\" ]]; then
+    export JAVA_HOME="${BASH_REMATCH[1]}"
+  fi
+fi
+
 cd "$repository_root"
-fvm flutter pub get --no-example
-fvm dart format --page-width 120 --output=none --set-exit-if-changed lib test example/lib example/test example/integration_test
-fvm dart analyze
-fvm flutter test --no-pub test
+flutter pub get --no-example
+dart format --page-width 120 --output=none --set-exit-if-changed lib test example/lib example/test example/integration_test
+dart analyze
+flutter test --no-pub test
 
 cd "$repository_root/example"
-fvm flutter pub get --enforce-lockfile --no-example
-fvm dart analyze
-fvm flutter test --no-pub test
-fvm flutter test --no-pub integration_test -d "$android_device_id"
+flutter pub get --enforce-lockfile --no-example
+dart analyze
+flutter test --no-pub test
+flutter test --no-pub integration_test -d "$android_device_id"
 
 "$repository_root/android/gradlew" -p "$repository_root/example/android" :firebase_testlab_detector:testDebugUnitTest --no-daemon
 
 cd "$repository_root/example"
-fvm flutter build apk --debug --no-pub
+flutter build apk --debug --no-pub
