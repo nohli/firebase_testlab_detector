@@ -28,8 +28,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      isRunningInTestlab =
-          await FirebaseTestlabDetector.isAppRunningInTestlab() ?? false;
+      isRunningInTestlab = await FirebaseTestlabDetector.isAppRunningInTestlab() ?? false;
     } on PlatformException {
       isRunningInTestlab = false;
     }
@@ -45,14 +44,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
+        appBar: AppBar(title: const Text('Plugin example app')),
         body: Center(
           child: Text(
-            _isRunningInTestlab
-                ? 'This app runs in Firebase Test Lab.'
-                : 'This app does not run in Firebase Test Lab.',
+            _isRunningInTestlab ? 'This app runs in Firebase Test Lab.' : 'This app does not run in Firebase Test Lab.',
           ),
         ),
       ),

@@ -3,6 +3,8 @@
 A Flutter plugin for Android that helps determine if your app is running within Firebase Test Lab. Use this to differentiate between regular usage and test runs in Firebase Test Lab (i.e., during Google Play pre-launch reports).
 
 Only works on Android. Returns null on other platforms.
+Requires Flutter 3.47 or newer and Android API 24 or newer.
+Android builds require AGP 9 with built-in Kotlin support.
 
 ## Getting Started
 
@@ -25,3 +27,11 @@ See also the [Firebase documentation](https://firebase.google.com/docs/test-lab/
 ## Why use this plugin?
 
 You might want to utilize this plugin to disable analytics, preventing skewed data from Firebase Test Lab (i.e., Google Play pre launch report) from appearing in your analytics dashboard.
+
+## Development
+
+Run the complete local handoff, including Dart, Flutter, Android integration, native plugin, and debug-build checks, with an Android device or emulator:
+
+```shell
+./tool/check.sh <android-device-id>
+```
