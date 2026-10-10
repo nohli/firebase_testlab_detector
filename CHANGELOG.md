@@ -1,8 +1,9 @@
-## Unreleased
+## 3.0.1
 
 * Handle missing plugin registration in the example.
 * Cover native setting values and run Android unit tests in CI.
 * Clarify initialization, error handling, and Android build requirements.
+* Honor the selected FVM SDK in development checks.
 
 ## 3.0.0
 
