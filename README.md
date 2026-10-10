@@ -38,7 +38,7 @@ You might want to utilize this plugin to disable analytics, preventing skewed da
 
 ## Development
 
-With [FVM](https://fvm.app/) installed, run the complete local handoff, including Dart, Flutter, Android integration, native plugin, and debug-build checks, with an Android device or emulator:
+With [FVM](https://fvm.app/) installed and Flutter 3.47 or newer selected, run the complete local handoff, including Dart, Flutter, Android integration, native plugin, and debug-build checks, with an Android device or emulator. FVM resolves a project/ancestor SDK, then its global default, then Flutter on `PATH`; see its [SDK selection order](https://fvm.app/documentation/getting-started/faq#how-does-fvm-find-the-flutter-version-to-use).
 
 ```shell
 ./tool/check.sh <android-device-id>
