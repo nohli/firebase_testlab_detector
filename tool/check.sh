@@ -10,6 +10,8 @@ fi
 repository_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 android_device_id="$1"
 
+cd "$repository_root"
+
 if [[ -z "${JAVA_HOME:-}" ]]; then
   flutter_configuration="$(fvm flutter config --machine)"
   if [[ "$flutter_configuration" =~ \"jdk-dir\"[[:space:]]*:[[:space:]]*\"([^\"]+)\" ]]; then
@@ -17,7 +19,6 @@ if [[ -z "${JAVA_HOME:-}" ]]; then
   fi
 fi
 
-cd "$repository_root"
 fvm flutter pub get --no-example
 fvm dart format --output=none --set-exit-if-changed lib test example/lib example/test example/integration_test
 fvm dart analyze

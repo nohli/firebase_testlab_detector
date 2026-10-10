@@ -1,7 +1,7 @@
 ## 3.0.1
 
 * Handle missing plugin registration in the example.
-* Cover native setting values and run Android unit tests in CI.
+* Expand native setting-value coverage in the existing Android unit tests.
 * Clarify initialization, error handling, and Android build requirements.
 * Honor the selected FVM SDK in development checks.
 
