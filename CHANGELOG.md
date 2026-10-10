@@ -1,9 +1,10 @@
 ## 3.0.1
 
-* Handle missing plugin registration in the example.
-* Expand native setting-value coverage in the existing Android unit tests.
-* Clarify initialization, error handling, and Android build requirements.
-* Honor the selected FVM SDK in development checks.
+* Handle missing Android plugin registration in the example app.
+* Clarify initialization, nullable results on unsupported platforms, native
+  errors, and the existing Flutter 3.47 / Android API 24 build requirements.
+* Expand native setting-value and Dart method-channel regression coverage.
+* Run development checks from the repository root so FVM honors the selected SDK.
 
 ## 3.0.0
 
