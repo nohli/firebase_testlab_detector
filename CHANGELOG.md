@@ -1,3 +1,9 @@
+## Unreleased
+
+* Handle missing plugin registration in the example.
+* Cover native setting values and run Android unit tests in CI.
+* Clarify initialization, error handling, and Android build requirements.
+
 ## 3.0.0
 
 * **Breaking:** Require Flutter 3.47 and Android API 24 or newer.

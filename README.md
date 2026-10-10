@@ -4,7 +4,7 @@ A Flutter plugin for Android that helps determine if your app is running within 
 
 Only works on Android. Returns null on other platforms.
 Requires Flutter 3.47 or newer and Android API 24 or newer.
-Android builds require AGP 9 with built-in Kotlin support.
+Android builds require Java 17 or newer and AGP 9 with built-in Kotlin support. Existing apps must follow Flutter's [built-in Kotlin migration](https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers), including removing the legacy Kotlin Android plugin.
 
 ## Getting Started
 
@@ -17,12 +17,20 @@ flutter pub add firebase_testlab_detector
 ### 2. Use the plugin
 
 ```dart
-final isRunningInTestlab = await FirebaseTestlabDetector.isAppRunningInTestlab() ?? false;
+import 'package:firebase_testlab_detector/firebase_testlab_detector.dart';
+
+Future<bool> runningInTestLab() async {
+  return await FirebaseTestlabDetector.isAppRunningInTestlab() ?? false;
+}
 ```
 
-This plugin reads the system property `firebase.test.lab`, and returns a boolean value indicating whether the app is running in Firebase Test Lab.
+Call from an initialized Flutter application. If you check before `runApp`, first call `WidgetsFlutterBinding.ensureInitialized()` from `package:flutter/widgets.dart`.
+
+This plugin reads the Android `Settings.System` setting `firebase.test.lab`, and returns a boolean value indicating whether the app is running in Firebase Test Lab.
 
 See also the [Firebase documentation](https://firebase.google.com/docs/test-lab/android/android-studio#modify_instrumented_test_behavior_for) for more details.
+
+Native lookup failures propagate as `PlatformException`; missing plugin registration throws `MissingPluginException`. The example falls back to `false` for either error.
 
 ## Why use this plugin?
 
@@ -30,7 +38,7 @@ You might want to utilize this plugin to disable analytics, preventing skewed da
 
 ## Development
 
-Run the complete local handoff, including Dart, Flutter, Android integration, native plugin, and debug-build checks, with an Android device or emulator:
+With [FVM](https://fvm.app/) installed, run the complete local handoff, including Dart, Flutter, Android integration, native plugin, and debug-build checks, with an Android device or emulator:
 
 ```shell
 ./tool/check.sh <android-device-id>
