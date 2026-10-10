@@ -4,7 +4,8 @@
 * Clarify initialization, nullable results on unsupported platforms, native
   errors, and the existing Flutter 3.47 / Android API 24 build requirements.
 * Expand native setting-value and Dart method-channel regression coverage.
-* Run development checks from the repository root so FVM honors the selected SDK.
+* Select stable Flutter through a checked-in FVM configuration and run
+  development checks from the repository root so FVM uses that SDK.
 
 ## 3.0.0
 
