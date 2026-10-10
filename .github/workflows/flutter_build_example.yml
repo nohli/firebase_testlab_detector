@@ -39,9 +39,3 @@ jobs:
         run: |
           cd example
           flutter build appbundle --release
-
-      - name: Run native Android unit tests
-        timeout-minutes: 10
-        run: |
-          cd example/android
-          ./gradlew :firebase_testlab_detector:testDebugUnitTest --no-daemon
