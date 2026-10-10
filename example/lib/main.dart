@@ -31,6 +31,8 @@ class _MyAppState extends State<MyApp> {
       isRunningInTestlab = await FirebaseTestlabDetector.isAppRunningInTestlab() ?? false;
     } on PlatformException {
       isRunningInTestlab = false;
+    } on MissingPluginException {
+      isRunningInTestlab = false;
     }
 
     // If the widget was removed from the tree while the asynchronous platform

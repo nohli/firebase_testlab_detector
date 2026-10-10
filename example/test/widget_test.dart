@@ -1,26 +1,32 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:firebase_testlab_detector_example/main.dart';
 
 void main() {
-  testWidgets('Verify not in Firebase Test Lab', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
-    // Verify that platform version is retrieved.
-    expect(
-      find.byWidgetPredicate(
-        (Widget widget) => widget is Text && widget.data!.contains('This app does not run in Firebase Test Lab.'),
-      ),
-      findsOneWidget,
-    );
-  });
+  TestWidgetsFlutterBinding.ensureInitialized();
+  const channel = MethodChannel('firebase_testlab_detector');
+  final messenger = TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+  tearDown(() => messenger.setMockMethodCallHandler(channel, null));
+  for (final value in [true, false, null]) {
+    testWidgets('displays native Test Lab result $value', (tester) async {
+      messenger.setMockMethodCallHandler(channel, (_) async => value);
+      await tester.pumpWidget(const MyApp());
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          value == true ? 'This app runs in Firebase Test Lab.' : 'This app does not run in Firebase Test Lab.',
+        ),
+        findsOneWidget,
+      );
+    });
+  }
+  for (final error in [PlatformException(code: 'lookup_failed'), MissingPluginException()]) {
+    testWidgets('handles ${error.runtimeType}', (tester) async {
+      messenger.setMockMethodCallHandler(channel, (_) async => throw error);
+      await tester.pumpWidget(const MyApp());
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      expect(find.text('This app does not run in Firebase Test Lab.'), findsOneWidget);
+    });
+  }
 }
