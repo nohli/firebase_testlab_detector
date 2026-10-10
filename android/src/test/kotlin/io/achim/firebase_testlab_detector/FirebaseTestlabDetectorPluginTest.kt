@@ -8,6 +8,9 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.NullSource
+import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.Mockito
 
 /*
@@ -20,7 +23,17 @@ import org.mockito.Mockito
 
 internal class FirebaseTestlabDetectorPluginTest {
   @Test
-  fun onMethodCall_isAppRunningInTestlab_returnsExpectedValue() {
+  fun unknownMethodIsNotImplemented() {
+    val result = Mockito.mock(MethodChannel.Result::class.java)
+    FirebaseTestlabDetectorPlugin().onMethodCall(MethodCall("unknown", null), result)
+    Mockito.verify(result).notImplemented()
+    Mockito.verifyNoMoreInteractions(result)
+  }
+
+  @ParameterizedTest
+  @NullSource
+  @ValueSource(strings = ["true", "false", "TRUE", "1", ""])
+  fun onMethodCall_isAppRunningInTestlab_returnsExpectedValue(setting: String?) {
     val contentResolver = Mockito.mock(ContentResolver::class.java)
     val context = Mockito.mock(Context::class.java)
     val binaryMessenger = Mockito.mock(BinaryMessenger::class.java)
@@ -32,7 +45,7 @@ internal class FirebaseTestlabDetectorPluginTest {
     Mockito.mockStatic(Settings.System::class.java).use { settings ->
       settings.`when`<String?> {
         Settings.System.getString(contentResolver, "firebase.test.lab")
-      }.thenReturn("true")
+      }.thenReturn(setting)
 
       val plugin = FirebaseTestlabDetectorPlugin()
       val call = MethodCall("isAppRunningInTestlab", null)
@@ -41,7 +54,7 @@ internal class FirebaseTestlabDetectorPluginTest {
       plugin.onMethodCall(call, mockResult)
       plugin.onDetachedFromEngine(binding)
 
-      Mockito.verify(mockResult).success(true)
+      Mockito.verify(mockResult).success(setting == "true")
     }
   }
 }
