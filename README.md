@@ -3,15 +3,25 @@
 A Flutter plugin for Android that helps determine if your app is running within Firebase Test Lab. Use this to differentiate between regular usage and test runs in Firebase Test Lab (i.e., during Google Play pre-launch reports).
 
 Only works on Android. Returns null on other platforms.
-Requires Flutter 3.47 or newer and Android API 24 or newer.
+Version 3.x requires Flutter 3.47 or newer and Android API 24 or newer.
 Android builds require Java 17 or newer and AGP 9 with built-in Kotlin support. Existing apps must follow Flutter's [built-in Kotlin migration](https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers), including removing the legacy Kotlin Android plugin.
 
 ## Getting Started
 
 ### 1. Add the dependency
 
-```shell
-flutter pub add firebase_testlab_detector
+**Flutter 3.47+**
+
+```yaml
+dependencies:
+  firebase_testlab_detector: ^3.0.1
+```
+
+**Flutter 3.10–<3.47**
+
+```yaml
+dependencies:
+  firebase_testlab_detector: ^2.0.0
 ```
 
 ### 2. Use the plugin
