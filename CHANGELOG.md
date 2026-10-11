@@ -1,11 +1,7 @@
 ## 3.0.1
 
-* Handle missing Android plugin registration in the example app.
-* Clarify initialization, nullable results on unsupported platforms, native
-  errors, and the existing Flutter 3.47 / Android API 24 build requirements.
-* Expand native setting-value and Dart method-channel regression coverage.
-* Select stable Flutter through a checked-in FVM configuration and run
-  development checks from the repository root so FVM uses that SDK.
+* Handle missing Android plugin registration in the example.
+* Clarify setup, unsupported-platform results and error handling.
 
 ## 3.0.0
 
