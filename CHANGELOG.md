@@ -1,8 +1,8 @@
 ## 3.0.1
 
-* Remove Flutter 3.50 deprecations from the example.
-* Handle missing Android plugin registration in the example.
-* Clarify setup, unsupported-platform results and error handling.
+* Replace deprecated Material imports with `package:material_ui/material_ui.dart` in the example for Flutter 3.50
+* Catch `MissingPluginException` in the example
+* Document that detection returns `null` on unsupported platforms
 
 ## 3.0.0
 
