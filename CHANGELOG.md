@@ -1,3 +1,9 @@
+## 3.0.1
+
+* Remove Flutter 3.50 deprecations from the example.
+* Handle missing Android plugin registration in the example.
+* Clarify setup, unsupported-platform results and error handling.
+
 ## 3.0.0
 
 * **Breaking:** Require Flutter 3.47 and Android API 24 or newer.
