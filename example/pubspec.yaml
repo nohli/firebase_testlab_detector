@@ -16,7 +16,7 @@ dependencies:
 
   firebase_testlab_detector:
     path: ../
-  material_ui: ^1.11.0
+  material_ui: ^1.11.1
 
 dev_dependencies:
   integration_test:
